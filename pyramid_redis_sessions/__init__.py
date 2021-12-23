@@ -80,6 +80,7 @@ def RedisSessionFactory(
     serialize=cPickle.dumps,
     deserialize=cPickle.loads,
     id_generator=_generate_session_id,
+    samesite='lax',
     ):
     """
     Constructs and returns a session factory that will provide session data
@@ -225,6 +226,7 @@ def RedisSessionFactory(
             cookie_secure=cookie_secure,
             cookie_httponly=cookie_httponly,
             secret=secret,
+            samesite=samesite,
             )
         delete_cookie = functools.partial(
             _delete_cookie,
@@ -276,6 +278,7 @@ def _set_cookie(
     cookie_secure,
     cookie_httponly,
     secret,
+    samesite,
     ):
     """
     `session` is via functools.partial
@@ -290,6 +293,7 @@ def _set_cookie(
         domain=cookie_domain,
         secure=cookie_secure,
         httponly=cookie_httponly,
+        samesite=samesite,
         )
 
 
